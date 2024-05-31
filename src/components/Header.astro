@@ -1,0 +1,33 @@
+---
+import Logo from "./Logo.astro";
+import DiamondIcon from "./DiamondIcon.astro";
+---
+
+<header class="relative z-50 flex-none lg:pt-11">
+    <div
+        class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-center sm:justify-between lg:flex-nowrap"
+    >
+        <div class="mt-10 lg:mt-0 lg:grow lg:basis-0">
+            <Logo class="h-12 w-auto text-blue-600" />
+        </div>
+        <div
+            class="order-first -mx-4 flex flex-auto basis-full overflow-x-auto whitespace-nowrap border-b border-blue-600/10 py-4 font-mono text-sm text-blue-600 sm:-mx-6 lg:order-none lg:mx-0 lg:basis-auto lg:border-0 lg:py-0"
+        >
+            <div class="mx-auto flex items-center gap-4 px-4">
+                <p>
+                    <time date-time="2024-09-21">21:a September, 2024</time>
+                </p>
+                <DiamondIcon
+                    class="h-1.5 w-1.5 overflow-visible fill-current stroke-current"
+                />
+                <p>Stockholm</p>
+            </div>
+        </div>
+        <div
+            class="hidden sm:mt-10 sm:flex lg:mt-0 lg:grow lg:basis-0 lg:justify-end"
+        >
+            <!-- <Button href="#">Get your tickets</Button> -->
+            <!-- Button takes user to RSVP form? -->
+        </div>
+    </div>
+</header>

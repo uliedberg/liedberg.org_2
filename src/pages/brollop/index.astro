@@ -1,5 +1,8 @@
 ---
-
+import Header from "../../components/Header.astro";
+import Intro from "../../components/Intro.astro";
+import Form from "../../components/Form.astro";
+import Timeline from "../../components/Timeline.astro";
 ---
 
 <!--
@@ -13,7 +16,7 @@
     </p>
   </div>
    -->
-<html lang="sv">
+<html lang="sv" class="font-sans h-full bg-white antialiased">
     <head>
         <meta charset="utf-8" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -21,29 +24,229 @@
         <meta name="generator" content={Astro.generator} />
         <title>liedberg.org/brollop/</title>
     </head>
-    <body
-        class="font-sans bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
-    >
-        <main class="container mx-auto my-60">
-            <h1 class="">Ylva & Ulf</h1>
-            <p>Vi gifter oss!</p>
-            <p>Anmäl er här:</p>
-            <form class="relative">
-                <fieldset class="block">
-                    <label for="name">Namn</label>
-                    <input type="text" id="name" name="name" />
-                </fieldset>
-                <fieldset class="block">
-                    <label for="email">E-post</label>
-                    <input type="email" id="email" name="email" />
-                </fieldset>
-                <button type="submit">Skicka</button>
-            </form>
-        </main>
-    </body>
-</html>
+    <body class="flex min-h-full">
+        <main class="flex w-full flex-col">
+            <Header />
+            <Intro />
+            <Form />
+            <Timeline />
 
-<!-- 
+            <!-- <section
+                id="intro"
+                aria-labelledby="intro-title"
+                class="py-20 sm:py-32 sm:pb-24 sm:pt-36"
+            >
+                <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
+                    <div class="mx-auto max-w-2xl lg:max-w-4xl lg:px-12">
+                        <h1
+                            class="font-display text-5xl font-bold tracking-tighter text-blue-600 sm:text-7xl"
+                        >
+                            Ylva & Ulf
+                        </h1>
+                        <div
+                            class="mt-6 space-y-6 font-display text-2xl tracking-tight text-blue-600"
+                        >
+                            <p>
+                                Vi gifter oss, och vi vill verkligen fira med
+                                er!
+                            </p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut
+                                enim ad minim veniam, quis nostrud exercitation
+                                ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat. Duis aute irure dolor in
+                                reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat nulla pariatur. Excepteur sint
+                                occaecat cupidatat non proident, sunt in culpa
+                                qui officia deserunt mollit anim id est laborum.
+                            </p>
+                            <p>Anmäl er här:</p>
+                        </div>
+                        <div
+                            class="mt-6 space-y-6 font-display text-2xl tracking-tight text-blue-600"
+                        >
+                            <form class="relative">
+                                <fieldset class="block">
+                                    <label for="name">Namn</label>
+                                    <input type="text" id="name" name="name" />
+                                </fieldset>
+                                <fieldset class="block">
+                                    <label for="email">E-post</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                    />
+                                </fieldset>
+                                <button type="submit">Skicka</button>
+                            </form>
+                        </div>
+                        <dl
+                            class="mt-10 grid grid-cols-2 gap-x-10 gap-y-6 sm:mt-16 sm:gap-x-16 sm:gap-y-10 sm:text-center lg:auto-cols-auto lg:grid-flow-col lg:grid-cols-none lg:justify-start lg:text-left"
+                        >
+                            <div>
+                                <dt class="font-mono text-sm text-blue-600">
+                                    Antal gäster
+                                </dt><dd
+                                    class="mt-0.5 text-2xl font-semibold tracking-tight text-blue-900"
+                                >
+                                    ~50
+                                </dd>
+                            </div>
+                            <div>
+                                <dt class="font-mono text-sm text-blue-600">
+                                    Barn?
+                                </dt><dd
+                                    class="mt-0.5 text-2xl font-semibold tracking-tight text-blue-900"
+                                >
+                                    Hör av er
+                                </dd>
+                            </div>
+                            <div>
+                                <dt class="font-mono text-sm text-blue-600">
+                                    Var?
+                                </dt><dd
+                                    class="mt-0.5 text-2xl font-semibold tracking-tight text-blue-900"
+                                >
+                                    Stockholm
+                                </dd>
+                            </div>
+                            <div>
+                                <dt class="font-mono text-sm text-blue-600">
+                                    Plats
+                                </dt><dd
+                                    class="mt-0.5 text-2xl font-semibold tracking-tight text-blue-900"
+                                >
+                                    Restaurang Ricordi
+                                </dd>
+                            </div>
+                        </dl>
+                        <div
+                            class="mt-6 space-y-6 font-display text-2xl tracking-tight text-blue-600"
+                        >
+                            <h2
+                                class="font-display text-4xl font-medium tracking-tighter text-blue-600 sm:text-5xl"
+                            >
+                                Schema
+                            </h2>
+                            <div
+                                class="relative -mx-4 flex overflow-x-auto pb-4 sm:mx-0 sm:block sm:overflow-visible sm:pb-0"
+                            >
+                                <div
+                                    class="absolute bottom-0 left-0.5 top-2 hidden w-px bg-slate-200 lg:block"
+                                >
+                                </div><div
+                                    class="grid auto-cols-auto grid-flow-col justify-start gap-x-8 gap-y-10 whitespace-nowrap px-4 sm:mx-auto sm:max-w-2xl sm:grid-cols-3 sm:px-0 sm:text-center lg:grid-flow-row lg:grid-cols-1 lg:text-left"
+                                    role="tablist"
+                                    aria-orientation="vertical"
+                                >
+                                    <div class="relative lg:pl-8">
+                                        <svg
+                                            aria-hidden="true"
+                                            viewBox="0 0 6 6"
+                                            class="absolute left-[-0.5px] top-[0.5625rem] hidden h-1.5 w-1.5 overflow-visible lg:block fill-transparent stroke-slate-400"
+                                            ><path
+                                                d="M3 0L6 3L3 6L0 3Z"
+                                                stroke-width="2"
+                                                stroke-linejoin="round"
+                                            ></path></svg
+                                        ><div class="relative">
+                                            <div
+                                                class="font-mono text-sm text-slate-500"
+                                            >
+                                                <button
+                                                    class="ui-not-focus-visible:outline-none"
+                                                    id="headlessui-tabs-tab-:Rpjal7qfja:"
+                                                    role="tab"
+                                                    type="button"
+                                                    aria-selected="false"
+                                                    tabindex="-1"
+                                                    data-headlessui-state=""
+                                                    aria-controls="headlessui-tabs-panel-:Rdal7qfja:"
+                                                    ><span
+                                                        class="absolute inset-0"
+                                                    ></span>Opening Day</button>
+                                            </div><time
+                                                datetime="2022-04-04"
+                                                class="mt-1.5 block text-2xl font-semibold tracking-tight text-blue-900"
+                                                >April 4</time>
+                                        </div>
+                                    </div><div class="relative lg:pl-8">
+                                        <svg
+                                            aria-hidden="true"
+                                            viewBox="0 0 6 6"
+                                            class="absolute left-[-0.5px] top-[0.5625rem] hidden h-1.5 w-1.5 overflow-visible lg:block fill-transparent stroke-slate-400"
+                                            ><path
+                                                d="M3 0L6 3L3 6L0 3Z"
+                                                stroke-width="2"
+                                                stroke-linejoin="round"
+                                            ></path></svg
+                                        ><div class="relative">
+                                            <div
+                                                class="font-mono text-sm text-slate-500"
+                                            >
+                                                <button
+                                                    class="ui-not-focus-visible:outline-none"
+                                                    id="headlessui-tabs-tab-:Rqjal7qfja:"
+                                                    role="tab"
+                                                    type="button"
+                                                    aria-selected="false"
+                                                    tabindex="-1"
+                                                    data-headlessui-state=""
+                                                    aria-controls="headlessui-tabs-panel-:Rlal7qfja:"
+                                                    ><span
+                                                        class="absolute inset-0"
+                                                    ></span>Speakers &amp;
+                                                    Workshops</button>
+                                            </div><time
+                                                datetime="2022-04-05"
+                                                class="mt-1.5 block text-2xl font-semibold tracking-tight text-blue-900"
+                                                >April 5</time>
+                                        </div>
+                                    </div><div class="relative lg:pl-8">
+                                        <svg
+                                            aria-hidden="true"
+                                            viewBox="0 0 6 6"
+                                            class="absolute left-[-0.5px] top-[0.5625rem] hidden h-1.5 w-1.5 overflow-visible lg:block fill-blue-600 stroke-blue-600"
+                                            ><path
+                                                d="M3 0L6 3L3 6L0 3Z"
+                                                stroke-width="2"
+                                                stroke-linejoin="round"
+                                            ></path></svg
+                                        ><div class="relative">
+                                            <div
+                                                class="font-mono text-sm text-blue-600"
+                                            >
+                                                <button
+                                                    class="ui-not-focus-visible:outline-none"
+                                                    id="headlessui-tabs-tab-:Rrjal7qfja:"
+                                                    role="tab"
+                                                    type="button"
+                                                    aria-selected="true"
+                                                    tabindex="0"
+                                                    data-headlessui-state="selected"
+                                                    aria-controls="headlessui-tabs-panel-:Rtal7qfja:"
+                                                    data-selected=""
+                                                    ><span
+                                                        class="absolute inset-0"
+                                                    ></span>Interviews</button>
+                                            </div><time
+                                                datetime="2022-04-06"
+                                                class="mt-1.5 block text-2xl font-semibold tracking-tight text-blue-900"
+                                                >April 6</time>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section> -->
+        </main>
+
+        <!-- 
 <style>
     html {
         color: #222;
@@ -67,3 +270,5 @@
         color: red;
     }
 </style> -->
+    </body>
+</html>
