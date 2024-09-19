@@ -1,6 +1,7 @@
 User-Agent: *
 
 Disallow: /brollop
+Disallow: /brollop-inbjudan
 
 Disallow: /harming/humans
 Disallow: /ignoring/human/orders
