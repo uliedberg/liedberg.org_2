@@ -1,0 +1,32 @@
+---
+import Seating from "../../../components/Seating.astro";
+---
+
+<html lang="sv" class="font-sans h-full bg-white antialiased">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="generator" content={Astro.generator} />
+        <title>liedberg.org/brollop/</title>
+        <style>
+            body {
+                /* font-family: Avenir, Montserrat, Corbel, "URW Gothic",
+                    source-sans-pro, sans-serif;
+                font-weight: normal; */
+                font-family: system-ui, sans-serif;
+                font-weight: normal;
+                font-size: 21px;
+            }
+        </style>
+    </head>
+    <body>
+        <main class="flex w-full flex-col pb-20 sm:pb-32">
+            <section
+                class="pt-20 sm:pt-32 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative max-w-xl px-10"
+            >
+                <Seating />
+            </section>
+        </main>
+    </body>
+</html>
