@@ -626,7 +626,7 @@ let cur = null;
   tip.className = 'tip';
   card.appendChild(tip);
 
-  function showAt(clientX) {
+  function showAt(clientX, pointerType) {
     if (!cur) return;
     const r = svgEl.getBoundingClientRect();
     const vx = (clientX - r.left) / r.width * W;
@@ -653,17 +653,34 @@ let cur = null;
     const pxX = r.left - cr.left + (x / W) * r.width;
     const pxY = r.top - cr.top + (y / H) * r.height;
     tip.style.display = 'block';
-    tip.style.left = pxX + 'px';
-    tip.style.top = Math.max(36, pxY) + 'px';
-    tip.style.transform = 'translate(' + (pxX > cr.width * 0.58 ? 'calc(-100% - 14px)' : '14px') + ', -50%)';
+    if (pointerType === 'touch') {
+      /* Ovanför punkten så att fingret inte skymmer; håll inom kortet */
+      const tw = tip.offsetWidth, th = tip.offsetHeight;
+      tip.style.left = Math.max(tw / 2 + 4, Math.min(cr.width - tw / 2 - 4, pxX)) + 'px';
+      tip.style.top = Math.max(th + 30, pxY) + 'px';
+      tip.style.transform = 'translate(-50%, calc(-100% - 28px))';
+    } else {
+      tip.style.left = pxX + 'px';
+      tip.style.top = Math.max(36, pxY) + 'px';
+      tip.style.transform = 'translate(' + (pxX > cr.width * 0.58 ? 'calc(-100% - 14px)' : '14px') + ', -50%)';
+    }
   }
 
-  svgEl.addEventListener('pointermove', e => showAt(e.clientX));
-  svgEl.addEventListener('pointerdown', e => showAt(e.clientX));
-  svgEl.addEventListener('pointerleave', () => {
+  function hide() {
     tip.style.display = 'none';
     const l = document.getElementById('hoverLayer');
     if (l) l.innerHTML = '';
+  }
+
+  svgEl.addEventListener('pointermove', e => showAt(e.clientX, e.pointerType));
+  svgEl.addEventListener('pointerdown', e => showAt(e.clientX, e.pointerType));
+  /* Mus: göm när pekaren lämnar grafen. Touch: låt tooltippen ligga
+     kvar efter släppt finger, tills man rör något utanför grafkortet. */
+  svgEl.addEventListener('pointerleave', e => {
+    if (e.pointerType !== 'touch') hide();
+  });
+  document.addEventListener('pointerdown', e => {
+    if (!card.contains(e.target)) hide();
   });
 })();
 
