@@ -293,6 +293,10 @@
   .legend span { display: inline-flex; align-items: center; gap: 7px; }
   .key { display: inline-block; width: 20px; height: 0; border-top: 3px solid var(--green); border-radius: 2px; }
   .key.dash { border-top: 2px dashed var(--ink-soft); }
+  .key.sim { border-top: 1px solid rgba(28,36,64,0.4); }
+
+  .curve-sim { fill: none; stroke: rgba(28,36,64,0.16); stroke-width: 1; }
+  .sim-band { fill: rgba(28,36,64,0.045); }
 
   /* ───── CARDS ───── */
   .cards {
@@ -598,6 +602,45 @@ function series(rate, monthly) {
   return out;
 }
 
+/* ── Monte Carlo: 10 banor med fast seed → samma "slump" varje besök ── */
+const NSIM = 10, SIGMA = 0.13, MC_SEED = 8;
+const MC_Z = (function () {
+  function mulberry32(a) {
+    return function () {
+      a |= 0; a = a + 0x6D2B79F5 | 0;
+      let t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  const rnd = mulberry32(MC_SEED), Z = [];
+  for (let s = 0; s < NSIM; s++) {
+    const row = [];
+    for (let y = 0; y < YEARS; y++) {
+      const u1 = Math.max(rnd(), 1e-9), u2 = rnd();
+      row.push(Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2));
+    }
+    Z.push(row);
+  }
+  return Z;
+})();
+
+function mcSeries(rate, monthly) {
+  /* Lognormala årsavkastningar centrerade så att medianbanan följer
+     huvudkurvan; samma z-värden återanvänds så reglagen inte slumpar om. */
+  const mu = 12 * Math.log(1 + rate / 12);
+  return MC_Z.map(row => {
+    const vals = [INITIAL];
+    let v = INITIAL;
+    for (let y = 0; y < YEARS; y++) {
+      const f = Math.exp(mu + SIGMA * row[y]);
+      v = (v + monthly * 6) * f + monthly * 6;
+      vals.push(v);
+    }
+    return vals;
+  });
+}
+
 function fmt(n) {
   if (n >= 995000) return (n / 1e6).toFixed(n >= 9950000 ? 1 : 2).replace('.', ',') + ' Mkr';
   if (n >= 1000) return Math.round(n / 1000) + ' tkr';
@@ -633,7 +676,7 @@ let cur = null;
     let i = Math.round((vx - P.l) / ((W - P.l - P.r) / YEARS));
     i = Math.max(0, Math.min(YEARS, i));
 
-    const maxV = cur.total[YEARS];
+    const maxV = cur.scale;
     const [x, y] = pt(cur.total, i, maxV);
     const gy2 = pt(cur.gift, i, maxV)[1];
     const invested = INITIAL + cur.monthly * 12 * i;
@@ -695,7 +738,14 @@ function render() {
 
   const total = series(rate, monthly);
   const gift = series(rate, 0);
-  const maxV = total[YEARS];
+  const sims = mcSeries(rate, monthly);
+  const bandMax = [], bandMin = [];
+  for (let y = 0; y <= YEARS; y++) {
+    let mx = -Infinity, mn = Infinity;
+    for (const s of sims) { mx = Math.max(mx, s[y]); mn = Math.min(mn, s[y]); }
+    bandMax.push(mx); bandMin.push(mn);
+  }
+  const maxV = Math.max(total[YEARS], Math.max.apply(null, bandMax));
   const invested = INITIAL + monthly * 12 * YEARS;
 
   const pTotal = path(total, maxV);
@@ -703,6 +753,14 @@ function render() {
   const [ex, ey] = pt(total, YEARS, maxV);
   const [gx, gy] = pt(gift, YEARS, maxV);
   const area = pTotal + ' L' + ex.toFixed(1) + ',' + (H - P.b) + ' L' + P.l + ',' + (H - P.b) + ' Z';
+
+  let band = path(bandMax, maxV);
+  for (let y = YEARS; y >= 0; y--) {
+    const [bx, by] = pt(bandMin, y, maxV);
+    band += ' L' + bx.toFixed(1) + ',' + by.toFixed(1);
+  }
+  band += ' Z';
+  const simPaths = sims.map(s => '<path d="' + path(s, maxV) + '" class="curve-sim"/>').join('');
 
   // åldersmarkeringar var tionde år
   let ticks = '';
@@ -722,19 +780,21 @@ function render() {
     '<stop offset="0%" stop-color="#2e7d4f" stop-opacity="0.22"/>' +
     '<stop offset="100%" stop-color="#2e7d4f" stop-opacity="0.01"/>' +
     '</linearGradient></defs>' +
+    '<path d="' + band + '" class="sim-band"/>' +
+    simPaths +
     '<path d="' + area + '" fill="url(#g)"/>' +
     (showGift ? '<path d="' + pGift + '" class="curve-gift"/>' : '') +
     '<path d="' + pTotal + '" class="curve-total"' +
       (drawn ? '' : ' stroke-dasharray="2200" stroke-dashoffset="2200" style="transition:stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1)"') + '/>' +
     '<circle cx="' + ex + '" cy="' + ey + '" r="5.5" fill="#2e7d4f" stroke="#fff" stroke-width="2"/>' +
-    '<text x="' + (ex - 10) + '" y="' + (ey - 13) + '" font-size="15" font-family="Fraunces, serif" font-weight="700" fill="#1d5c38" text-anchor="end">' + fmt(maxV) + '</text>' +
+    '<text x="' + (ex - 10) + '" y="' + (ey - 13) + '" font-size="15" font-family="Fraunces, serif" font-weight="700" fill="#1d5c38" text-anchor="end">' + fmt(total[YEARS]) + '</text>' +
     (showGift
       ? '<circle cx="' + gx + '" cy="' + gy + '" r="3.5" fill="#5a6178"/>' +
         '<text x="' + (gx - 10) + '" y="' + (gy - 9) + '" font-size="11.5" font-family="IBM Plex Sans" fill="#5a6178" text-anchor="end">bara g\u00e5van: ' + fmt(gift[YEARS]) + '</text>'
       : '') +
     '<g id="hoverLayer"></g>';
 
-  cur = { total: total, gift: gift, monthly: monthly };
+  cur = { total: total, gift: gift, monthly: monthly, scale: maxV };
 
   if (!drawn) {
     requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -746,7 +806,8 @@ function render() {
 
   document.getElementById('legend').innerHTML =
     '<span><span class="key"></span>G\u00e5van' + (showGift ? ' + ditt m\u00e5nadsspar' : '') + '</span>' +
-    (showGift ? '<span><span class="key dash"></span>Bara g\u00e5van</span>' : '');
+    (showGift ? '<span><span class="key dash"></span>Bara g\u00e5van</span>' : '') +
+    '<span><span class="key sim"></span>10 simulerade b\u00f6rsutfall</span>';
 
   document.getElementById('cards').innerHTML =
     '<div class="card"><div class="card-label">Insatt totalt</div><div class="card-value">' + fmt(invested) + '</div>' +
