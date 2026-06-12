@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grattis Viktor — Student 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper: #faf7f0;
+    --paper2: #f2eee3;
+    --ink: #1c2440;
+    --ink-soft: #5a6178;
+    --green: #2e7d4f;
+    --green-deep: #1d5c38;
+    --gold: #c9a227;
+    --line: rgba(28,36,64,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-variant-numeric: tabular-nums;
+    overflow-x: hidden;
+    line-height: 1.5;
+  }
+
+  /* ───── HERO ───── */
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 56px 24px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .confetti {
+    position: absolute;
+    top: -12px;
+    border-radius: 1px;
+    pointer-events: none;
+    animation: fall linear forwards;
+  }
+  @keyframes fall {
+    to { transform: translateY(105vh) rotate(720deg); opacity: 0.2; }
+  }
+
+  .cap {
+    width: clamp(88px, 22vw, 130px);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: rise 0.8s 0.15s cubic-bezier(.2,.8,.3,1) forwards;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    opacity: 0;
+    animation: rise 0.7s 0.35s ease forwards;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: clamp(46px, 11vw, 96px);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    margin-bottom: 18px;
+    opacity: 0;
+    animation: rise 0.8s 0.5s ease forwards;
+  }
+  h1 em { font-style: italic; font-weight: 600; color: var(--green-deep); }
+
+  .hero-lede {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: clamp(17px, 4.2vw, 23px);
+    color: var(--ink-soft);
+    max-width: 26ch;
+    margin: 0 auto 40px;
+    opacity: 0;
+    animation: rise 0.8s 0.65s ease forwards;
+  }
+
+  .seed {
+    display: inline-block;
+    border: 1.5px solid var(--ink);
+    border-radius: 999px;
+    padding: 14px 34px;
+    background: #fff;
+    box-shadow: 4px 4px 0 var(--gold);
+    margin-bottom: 14px;
+    opacity: 0;
+    animation: rise 0.8s 0.8s ease forwards;
+  }
+  .seed-amt {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(30px, 7vw, 44px);
+    font-weight: 700;
+    line-height: 1;
+  }
+  .seed-amt span { font-size: 0.45em; font-weight: 600; color: var(--ink-soft); margin-left: 4px; }
+
+  .seed-note {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    margin-bottom: 52px;
+    opacity: 0;
+    animation: rise 0.8s 0.95s ease forwards;
+  }
+  .seed-note strong { color: var(--green-deep); font-weight: 600; }
+
+  .scroll-hint {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    opacity: 0;
+    animation: rise 0.8s 1.2s ease forwards;
+  }
+  .scroll-hint::after {
+    content: '';
+    display: block;
+    width: 1px; height: 36px;
+    margin: 10px auto 0;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ───── SECTIONS ───── */
+  .wrap { max-width: 820px; margin: 0 auto; padding: 0 22px; }
+
+  section.block { padding: 72px 0; }
+
+  .label {
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: clamp(27px, 6vw, 42px);
+    line-height: 1.12;
+    margin-bottom: 14px;
+  }
+
+  .body-text {
+    font-size: 15.5px;
+    color: var(--ink-soft);
+    max-width: 56ch;
+    margin-bottom: 34px;
+  }
+
+  /* ───── CONTROLS ───── */
+  .controls { display: grid; gap: 14px; margin-bottom: 26px; }
+
+  .control {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .control.nudge { border-color: var(--green); box-shadow: 0 0 0 0 rgba(46,125,79,0.35); animation: pulse 2s ease infinite; }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(46,125,79,0.0); }
+    50%      { box-shadow: 0 0 0 6px rgba(46,125,79,0.14); }
+  }
+
+  .ctrl-name { font-size: 13.5px; font-weight: 500; color: var(--ink-soft); white-space: nowrap; }
+  .ctrl-name small { display: block; font-size: 11px; color: var(--green-deep); font-weight: 600; }
+
+  .ctrl-val {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+    min-width: 86px;
+    text-align: right;
+  }
+
+  input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--paper2);
+    outline: none;
+    border: 1px solid var(--line);
+    cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--green);
+    border: 2.5px solid #fff;
+    box-shadow: 0 1px 4px rgba(28,36,64,0.3);
+    cursor: pointer;
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--green);
+    border: 2.5px solid #fff;
+    box-shadow: 0 1px 4px rgba(28,36,64,0.3);
+    cursor: pointer;
+  }
+  input[type=range]:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+
+  /* ───── CHART ───── */
+  .chart-card {
+    position: relative;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 26px 18px 14px;
+    margin-bottom: 18px;
+  }
+
+  svg.chart { width: 100%; height: auto; display: block; overflow: visible; touch-action: pan-y; cursor: crosshair; }
+
+  .tip {
+    display: none;
+    position: absolute;
+    z-index: 5;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 9px 12px;
+    font-size: 12px;
+    line-height: 1.6;
+    box-shadow: 0 4px 16px rgba(28,36,64,0.14);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .tip .tip-age { font-family: 'Fraunces', serif; font-weight: 700; font-size: 14px; margin-bottom: 3px; }
+  .tip .row { display: flex; justify-content: space-between; gap: 16px; }
+  .tip .row span { color: var(--ink-soft); }
+  .tip .row strong { color: var(--green-deep); }
+
+  .curve-total {
+    fill: none;
+    stroke: var(--green);
+    stroke-width: 3;
+    stroke-linecap: round;
+  }
+  .curve-gift {
+    fill: none;
+    stroke: var(--ink-soft);
+    stroke-width: 1.6;
+    stroke-dasharray: 5 5;
+    opacity: 0.65;
+  }
+
+  .legend {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    padding: 14px 6px 8px;
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; }
+  .key { display: inline-block; width: 20px; height: 0; border-top: 3px solid var(--green); border-radius: 2px; }
+  .key.dash { border-top: 2px dashed var(--ink-soft); }
+
+  /* ───── CARDS ───── */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+  }
+  .card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px;
+  }
+  .card.big {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .card-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 8px; }
+  .card.big .card-label { color: var(--gold); }
+  .card-value { font-family: 'Fraunces', serif; font-size: clamp(20px, 4.5vw, 27px); font-weight: 700; line-height: 1.05; }
+  .card.big .card-value { color: #fff; }
+  .card-sub { font-size: 12px; color: var(--ink-soft); margin-top: 6px; }
+  .card.big .card-sub { color: rgba(250,247,240,0.7); }
+
+  .fineprint {
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    opacity: 0.75;
+    margin-top: 22px;
+    max-width: 60ch;
+  }
+
+  /* ───── LETTER ───── */
+  .letter {
+    background: var(--paper2);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .letter .wrap { max-width: 620px; text-align: center; }
+
+  blockquote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(21px, 5vw, 29px);
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+  .attrib {
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 42px;
+  }
+
+  .letter-body { font-size: 16px; line-height: 1.85; color: var(--ink-soft); text-align: left; }
+  .letter-body p + p { margin-top: 16px; }
+  .letter-body strong { color: var(--ink); font-weight: 600; }
+  .letter-sig {
+    margin-top: 38px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--green-deep);
+    text-align: center;
+  }
+  .letter-from {
+    margin-top: 14px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    text-align: center;
+    letter-spacing: 0.03em;
+  }
+
+  /* ───── QR ───── */
+  /* QR-blocket är till för papperskortet — göms på skärm */
+  .qr-block { display: none; text-align: center; padding: 64px 22px 88px; }
+  #qr-holder {
+    display: inline-block;
+    position: relative;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px;
+    margin: 22px 0 12px;
+    box-shadow: 5px 5px 0 var(--gold);
+  }
+  #qr-holder img, #qr-holder canvas { display: block; }
+  .qr-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 52px; height: 52px;
+    background: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .qr-url { font-size: 12.5px; color: var(--ink-soft); letter-spacing: 0.04em; }
+
+  .pen-space { display: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; opacity: 1 !important; }
+    .confetti { display: none; }
+  }
+
+  @media (max-width: 520px) {
+    .control { grid-template-columns: 1fr auto; }
+    .control input[type=range] { grid-column: 1 / -1; grid-row: 2; }
+  }
+
+  /* ───── PRINT: fysiska presenten ───── */
+  @media print {
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+    body { background: #fff; }
+
+    /* Animationer körs inte vid print — tvinga fram allt som annars startar på opacity 0 */
+    .cap, .eyebrow, h1, .hero-lede, .seed, .seed-note, .scroll-hint {
+      opacity: 1 !important;
+      animation: none !important;
+      transform: none !important;
+    }
+    .confetti { display: none !important; }
+
+    /* Göm allt mellan "Se vad det kan bli" och QR-koden */
+    section.block { display: none !important; }
+
+    /* Kompaktare hero så allt ryms på en sida */
+    .hero {
+      min-height: auto;
+      padding: 48px 24px 0;
+    }
+    .scroll-hint::after { height: 26px; }
+
+    .qr-block { display: block; padding: 28px 22px 16px; }
+    .qr-block .label { display: none; }
+    #qr-holder { box-shadow: 3px 3px 0 var(--gold); padding: 12px; margin: 14px 0 12px; }
+    #qr-holder img, #qr-holder canvas { width: 140px !important; height: 140px !important; }
+    .qr-center { width: 40px; height: 40px; }
+    .qr-center svg { width: 36px; height: 25px; }
+    .qr-url { font-size: 10.5px; }
+
+    /* Mindre typografi, men luftiga avstånd */
+    .cap { width: 84px; margin-bottom: 28px; }
+    .eyebrow { font-size: 10px; margin-bottom: 14px; }
+    h1 { font-size: 56px; margin-bottom: 20px; }
+    .hero-lede { font-size: 16px; margin-bottom: 40px; }
+    .seed { padding: 10px 26px; box-shadow: 3px 3px 0 var(--gold); margin-bottom: 16px; }
+    .seed-amt { font-size: 30px; }
+    .seed-note { font-size: 12px; margin-bottom: 0; }
+    .pen-space { display: block; height: 170px; }
+    .scroll-hint { font-size: 10px; }
+
+    @page { margin: 14mm; size: A4 portrait; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ───────── HERO ───────── -->
+<header class="hero" id="hero">
+  <!-- Svensk studentmössa -->
+  <svg class="cap" viewBox="0 0 140 96" aria-hidden="true">
+    <!-- skugga -->
+    <ellipse cx="70" cy="88" rx="44" ry="5" fill="rgba(28,36,64,0.08)"/>
+    <!-- kulle -->
+    <path d="M22 56 C22 24, 50 12, 70 12 C90 12, 118 24, 118 56 L22 56 Z" fill="#ffffff" stroke="#1c2440" stroke-width="2.5"/>
+    <!-- sömmar -->
+    <path d="M70 12 C70 26, 70 42, 70 56" stroke="rgba(28,36,64,0.15)" stroke-width="1.5" fill="none"/>
+    <path d="M40 18 C36 30, 33 44, 32 56" stroke="rgba(28,36,64,0.12)" stroke-width="1.5" fill="none"/>
+    <path d="M100 18 C104 30, 107 44, 108 56" stroke="rgba(28,36,64,0.12)" stroke-width="1.5" fill="none"/>
+    <!-- band -->
+    <rect x="19" y="54" width="102" height="14" rx="4" fill="#1c2440"/>
+    <!-- kokard -->
+    <circle cx="70" cy="61" r="6.5" fill="#c9a227"/>
+    <circle cx="70" cy="61" r="3" fill="#f4e6b8"/>
+    <!-- skärm -->
+    <path d="M38 68 C50 84, 90 84, 102 68 C88 76, 52 76, 38 68 Z" fill="#10162c"/>
+  </svg>
+
+  <p class="eyebrow">Studenten 2026</p>
+  <h1>Grattis,<br><em>Viktor</em></h1>
+  <p class="hero-lede">Det här är inte ett presentkort.<br>Det är ett frö.</p>
+
+  <div class="seed">
+    <div class="seed-amt">4 000<span>kr</span></div>
+  </div>
+  <p class="seed-note">Redan planterat — på ett konto hos <strong>Lysa</strong> i ditt namn.</p>
+
+  <!-- Yta för handskriven hälsning — syns bara vid utskrift -->
+  <div class="pen-space" aria-hidden="true"></div>
+
+  <p class="scroll-hint">Se vad det kan bli</p>
+</header>
+
+<!-- ───────── KALKYLATOR ───────── -->
+<section class="block">
+  <div class="wrap">
+    <p class="label">Ränta på ränta</p>
+    <h2>Räkna på din egen framtid</h2>
+    <p class="body-text">Kurvan visar dina pengar från idag tills du är 69 — ungefär den ålder då din generation väntas gå i pension. Dra i reglagen och se vad som händer.</p>
+
+    <div class="controls">
+      <div class="control">
+        <span class="ctrl-name">Årsavkastning</span>
+        <input type="range" id="rate" min="4" max="12" step="0.5" value="7" aria-label="Förväntad årsavkastning i procent">
+        <span class="ctrl-val" id="rateVal">7%</span>
+      </div>
+      <div class="control nudge" id="monthlyCtrl">
+        <span class="ctrl-name">Eget månadsspar<small>← dra i den här!</small></span>
+        <input type="range" id="monthly" min="0" max="5000" step="100" value="0" aria-label="Eget månadssparande i kronor">
+        <span class="ctrl-val" id="monthlyVal">0 kr</span>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <svg class="chart" id="chart" viewBox="0 0 700 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Graf över kapitalutveckling från 19 till 69 års ålder"></svg>
+      <div class="legend" id="legend"></div>
+    </div>
+
+    <div class="cards" id="cards"></div>
+
+    <p class="fineprint">Beräknat med månatlig ränta-på-ränta. 7 % per år motsvarar ungefär börsens historiska avkastning <em>efter</em> inflation — nominellt har breda börsindex gett runt 9 %, men cirka 2 % äts upp av inflationen över tid. Så siffrorna här är i dagens penningvärde. Historisk avkastning är ingen garanti för framtida. Fröet bryr sig inte: det växer ändå.</p>
+  </div>
+</section>
+
+<!-- ───────── BREV ───────── -->
+<section class="block letter">
+  <div class="wrap">
+    <blockquote>"Börsen flyttar pengar från den otålige till den tålige."</blockquote>
+    <p class="attrib">— Warren Buffett (fritt översatt)</p>
+
+    <div class="letter-body">
+      <p>Du är 19. Det betyder att du äger något som inte går att köpa för några pengar i världen: <strong>lång tid av ränta-på-ränta framför dig</strong>.</p>
+      <p>Gåvan ligger redan hos Lysa — spridd över hela världens börser, automatiskt ombalanserad, låga avgifter. Du behöver inte välja fonder eller bevaka kurser. Fröet sköter sig självt.</p>
+      <p>Men du såg vad reglaget gjorde. Det är inte gåvan som avgör — det är vanan. Och det enklaste tricket vi vet är det här: <strong>spara 10 % av allt du tjänar.</strong></p>
+      <p>10 % känns nästan aldrig. Men det växer med dig: en första lön på 25 000 blir 2 500 kr i månaden. Dra reglaget dit och se vad som händer.</p>
+    </div>
+
+    <p class="letter-sig">Grattis till examen.</p>
+    <p class="letter-from">Ylva, Uffe, Blenda &amp; Liv<br>farmor Aina &amp; farfar Rolf</p>
+  </div>
+</section>
+
+<!-- ───────── QR ───────── -->
+<footer class="qr-block">
+  <p class="label">Spara sidan</p>
+  <div id="qr-holder">
+    <div id="qr"></div>
+    <div class="qr-center">
+      <svg viewBox="0 0 140 96" width="46" height="32" aria-hidden="true">
+        <path d="M22 56 C22 24, 50 12, 70 12 C90 12, 118 24, 118 56 L22 56 Z" fill="#ffffff" stroke="#1c2440" stroke-width="6"/>
+        <rect x="19" y="54" width="102" height="16" rx="5" fill="#1c2440"/>
+        <circle cx="70" cy="62" r="8" fill="#c9a227"/>
+        <path d="M38 70 C50 88, 90 88, 102 70 C88 79, 52 79, 38 70 Z" fill="#10162c"/>
+      </svg>
+    </div>
+  </div>
+  <p class="qr-url">liedberg.org/viktor/student</p>
+</footer>
+
+<script>
+/* ───────── Konfetti (en gång, diskret) ───────── */
+(function () {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const hero = document.getElementById('hero');
+  const colors = ['#c9a227', '#1c2440', '#2e7d4f', '#e8d48a'];
+  for (let i = 0; i < 28; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    const s = 5 + Math.random() * 6;
+    c.style.cssText =
+      'left:' + (Math.random() * 100) + '%;' +
+      'width:' + s + 'px;height:' + (s * 0.45) + 'px;' +
+      'background:' + colors[i % colors.length] + ';' +
+      'animation-duration:' + (3.4 + Math.random() * 2.6) + 's;' +
+      'animation-delay:' + (Math.random() * 1.2) + 's;' +
+      'transform:rotate(' + (Math.random() * 360) + 'deg);';
+    hero.appendChild(c);
+    c.addEventListener('animationend', () => c.remove());
+  }
+})();
+
+/* ───────── Kalkyl ───────── */
+const START_AGE = 19, END_AGE = 69, YEARS = END_AGE - START_AGE;
+const INITIAL = 4000;
+const W = 700, H = 300, P = { t: 26, r: 14, b: 34, l: 14 };
+
+function series(rate, monthly) {
+  const mr = rate / 12, out = [];
+  for (let y = 0; y <= YEARS; y++) {
+    const m = y * 12;
+    const lump = INITIAL * Math.pow(1 + mr, m);
+    const contrib = mr === 0 ? monthly * m : monthly * ((Math.pow(1 + mr, m) - 1) / mr);
+    out.push(lump + contrib);
+  }
+  return out;
+}
+
+function fmt(n) {
+  if (n >= 995000) return (n / 1e6).toFixed(n >= 9950000 ? 1 : 2).replace('.', ',') + ' Mkr';
+  if (n >= 1000) return Math.round(n / 1000) + ' tkr';
+  return Math.round(n) + ' kr';
+}
+
+function path(vals, maxV) {
+  const xs = (W - P.l - P.r) / YEARS, ys = (H - P.t - P.b) / maxV;
+  return vals.map((v, i) =>
+    (i ? 'L' : 'M') + (P.l + i * xs).toFixed(1) + ',' + (H - P.b - v * ys).toFixed(1)
+  ).join(' ');
+}
+function pt(vals, i, maxV) {
+  const xs = (W - P.l - P.r) / YEARS, ys = (H - P.t - P.b) / maxV;
+  return [P.l + i * xs, H - P.b - vals[i] * ys];
+}
+
+let drawn = false;
+let cur = null;
+
+/* ── Hover/touch: punkt + tooltip ── */
+(function setupHover() {
+  const svgEl = document.getElementById('chart');
+  const card = svgEl.closest('.chart-card');
+  const tip = document.createElement('div');
+  tip.className = 'tip';
+  card.appendChild(tip);
+
+  function showAt(clientX) {
+    if (!cur) return;
+    const r = svgEl.getBoundingClientRect();
+    const vx = (clientX - r.left) / r.width * W;
+    let i = Math.round((vx - P.l) / ((W - P.l - P.r) / YEARS));
+    i = Math.max(0, Math.min(YEARS, i));
+
+    const maxV = cur.total[YEARS];
+    const [x, y] = pt(cur.total, i, maxV);
+    const gy2 = pt(cur.gift, i, maxV)[1];
+    const invested = INITIAL + cur.monthly * 12 * i;
+
+    document.getElementById('hoverLayer').innerHTML =
+      '<line x1="' + x + '" y1="' + P.t + '" x2="' + x + '" y2="' + (H - P.b) + '" stroke="rgba(28,36,64,0.25)" stroke-dasharray="3 3"/>' +
+      (cur.monthly > 0 ? '<circle cx="' + x + '" cy="' + gy2 + '" r="4" fill="#fff" stroke="#5a6178" stroke-width="2"/>' : '') +
+      '<circle cx="' + x + '" cy="' + y + '" r="5.5" fill="#fff" stroke="#2e7d4f" stroke-width="2.5"/>';
+
+    tip.innerHTML =
+      '<div class="tip-age">' + (START_AGE + i) + ' \u00e5r</div>' +
+      '<div class="row"><span>Insatt</span>' + fmt(invested) + '</div>' +
+      '<div class="row"><span>F\u00f6rv\u00e4ntat</span><strong>' + fmt(cur.total[i]) + '</strong></div>' +
+      (cur.monthly > 0 ? '<div class="row"><span>Bara g\u00e5van</span>' + fmt(cur.gift[i]) + '</div>' : '');
+
+    const cr = card.getBoundingClientRect();
+    const pxX = r.left - cr.left + (x / W) * r.width;
+    const pxY = r.top - cr.top + (y / H) * r.height;
+    tip.style.display = 'block';
+    tip.style.left = pxX + 'px';
+    tip.style.top = Math.max(36, pxY) + 'px';
+    tip.style.transform = 'translate(' + (pxX > cr.width * 0.58 ? 'calc(-100% - 14px)' : '14px') + ', -50%)';
+  }
+
+  svgEl.addEventListener('pointermove', e => showAt(e.clientX));
+  svgEl.addEventListener('pointerdown', e => showAt(e.clientX));
+  svgEl.addEventListener('pointerleave', () => {
+    tip.style.display = 'none';
+    const l = document.getElementById('hoverLayer');
+    if (l) l.innerHTML = '';
+  });
+})();
+
+function render() {
+  const rate = parseFloat(document.getElementById('rate').value) / 100;
+  const monthly = parseInt(document.getElementById('monthly').value, 10);
+  document.getElementById('rateVal').textContent = document.getElementById('rate').value.replace('.', ',') + '%';
+  document.getElementById('monthlyVal').textContent = monthly + ' kr';
+
+  // släck nudgen när han väl dragit
+  if (monthly > 0) document.getElementById('monthlyCtrl').classList.remove('nudge');
+
+  const total = series(rate, monthly);
+  const gift = series(rate, 0);
+  const maxV = total[YEARS];
+  const invested = INITIAL + monthly * 12 * YEARS;
+
+  const pTotal = path(total, maxV);
+  const pGift = path(gift, maxV);
+  const [ex, ey] = pt(total, YEARS, maxV);
+  const [gx, gy] = pt(gift, YEARS, maxV);
+  const area = pTotal + ' L' + ex.toFixed(1) + ',' + (H - P.b) + ' L' + P.l + ',' + (H - P.b) + ' Z';
+
+  // åldersmarkeringar var tionde år
+  let ticks = '';
+  for (let age = START_AGE; age <= END_AGE; age += 10) {
+    const x = P.l + ((age - START_AGE) / YEARS) * (W - P.l - P.r);
+    ticks += '<line x1="' + x + '" y1="' + (H - P.b) + '" x2="' + x + '" y2="' + (H - P.b + 5) + '" stroke="rgba(28,36,64,0.3)"/>' +
+      '<text x="' + x + '" y="' + (H - P.b + 20) + '" font-size="11.5" font-family="IBM Plex Sans" fill="#5a6178" text-anchor="middle">' +
+      (age === END_AGE ? '69 \u2014 pension' : age + ' \u00e5r') + '</text>';
+  }
+
+  const showGift = monthly > 0;
+
+  document.getElementById('chart').innerHTML =
+    '<line x1="' + P.l + '" y1="' + (H - P.b) + '" x2="' + (W - P.r) + '" y2="' + (H - P.b) + '" stroke="rgba(28,36,64,0.2)"/>' +
+    ticks +
+    '<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">' +
+    '<stop offset="0%" stop-color="#2e7d4f" stop-opacity="0.22"/>' +
+    '<stop offset="100%" stop-color="#2e7d4f" stop-opacity="0.01"/>' +
+    '</linearGradient></defs>' +
+    '<path d="' + area + '" fill="url(#g)"/>' +
+    (showGift ? '<path d="' + pGift + '" class="curve-gift"/>' : '') +
+    '<path d="' + pTotal + '" class="curve-total"' +
+      (drawn ? '' : ' stroke-dasharray="2200" stroke-dashoffset="2200" style="transition:stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1)"') + '/>' +
+    '<circle cx="' + ex + '" cy="' + ey + '" r="5.5" fill="#2e7d4f" stroke="#fff" stroke-width="2"/>' +
+    '<text x="' + (ex - 10) + '" y="' + (ey - 13) + '" font-size="15" font-family="Fraunces, serif" font-weight="700" fill="#1d5c38" text-anchor="end">' + fmt(maxV) + '</text>' +
+    (showGift
+      ? '<circle cx="' + gx + '" cy="' + gy + '" r="3.5" fill="#5a6178"/>' +
+        '<text x="' + (gx - 10) + '" y="' + (gy - 9) + '" font-size="11.5" font-family="IBM Plex Sans" fill="#5a6178" text-anchor="end">bara g\u00e5van: ' + fmt(gift[YEARS]) + '</text>'
+      : '') +
+    '<g id="hoverLayer"></g>';
+
+  cur = { total: total, gift: gift, monthly: monthly };
+
+  if (!drawn) {
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const c = document.querySelector('.curve-total');
+      if (c) c.style.strokeDashoffset = '0';
+    }));
+    drawn = true;
+  }
+
+  document.getElementById('legend').innerHTML =
+    '<span><span class="key"></span>G\u00e5van' + (showGift ? ' + ditt m\u00e5nadsspar' : '') + '</span>' +
+    (showGift ? '<span><span class="key dash"></span>Bara g\u00e5van</span>' : '');
+
+  document.getElementById('cards').innerHTML =
+    '<div class="card"><div class="card-label">Insatt totalt</div><div class="card-value">' + fmt(invested) + '</div>' +
+    '<div class="card-sub">4 000 kr' + (monthly ? ' + ' + monthly + ' kr/m\u00e5n' : ', en g\u00e5ng') + '</div></div>' +
+    '<div class="card"><div class="card-label">N\u00e4r du \u00e4r 44</div><div class="card-value">' + fmt(total[25]) + '</div></div>' +
+    '<div class="card big"><div class="card-label">N\u00e4r du \u00e4r 69</div><div class="card-value">' + fmt(total[YEARS]) + '</div>' +
+    '<div class="card-sub">' + (total[YEARS] / invested).toFixed(1).replace('.', ',') + '\u00d7 det du satt in</div></div>';
+}
+
+document.getElementById('rate').addEventListener('input', render);
+document.getElementById('monthly').addEventListener('input', render);
+render();
+
+/* ───────── QR ───────── */
+new QRCode(document.getElementById('qr'), {
+  text: 'https://liedberg.org/viktor/student/',
+  width: 190,
+  height: 190,
+  colorDark: '#1c2440',
+  colorLight: '#ffffff',
+  correctLevel: QRCode.CorrectLevel.H
+});
+</script>
+</body>
+</html>
