@@ -1,6 +1,10 @@
-allowBuilds:
-  esbuild: true
-  sharp: true
+# `packages` is required by pnpm 9 (used by Vercel); the build-script
+# approvals below are only read by pnpm 10+.
+packages:
+  - "."
 onlyBuiltDependencies:
   - esbuild
   - sharp
+allowBuilds:
+  esbuild: true
+  sharp: true
